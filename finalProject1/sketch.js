@@ -39,24 +39,24 @@ function setup() {
 }
 
 function draw() {
-    // Create a gradient background for the sky
+    //gradient background
     for (let i = 0; i <= height; i++) {
         let inter = map(i, 0, height, 0, 1);
-        let c = lerpColor(color(135, 206, 235), color(255, 204, 0), inter); // Sky color to sunset
+        let c = lerpColor(color(135, 206, 235), color(255, 204, 0), inter);
         stroke(c);
         line(0, i, width, i);
     }
 
-    // Draw the sun
+    //sun
     fill(255, 204, 0);
     noStroke();
     ellipse(800, 100, 80, 80);
 
-    // Draw the ground
+    //ground
     fill(34, 139, 34);
     rect(0, 350, width, height - 350);
 
-    // Draw game objects
+    //game objects
     gameObj.Untouch.forEach(obj => obj.draw());
     gameObj.Castles.forEach(castle => castle.draw());
     gameObj.Clouds.forEach((cloud, ind) => (cloud.draw(), cloud.move()));
@@ -73,21 +73,15 @@ function castle(x1, y, width, height) {
     this.height = height;
 
     this.draw = function() {
-        // Base of the castle
+        //castle
         fill("black");
         rect(this.x1, this.y - this.height, this.width, this.height);
-
-        // Towers
         fill("black");
-        rect(this.x1 + 30, this.y - this.height - 50, 30, 50); // Left tower
-        rect(this.x1 + this.width - 60, this.y - this.height - 50, 30, 50); // Right tower
-
-        // Roofs
+        rect(this.x1 + 30, this.y - this.height - 50, 30, 50);
+        rect(this.x1 + this.width - 60, this.y - this.height - 50, 30, 50);
         fill("black");
-        triangle(this.x1, this.y - this.height, this.x1 + 30, this.y - this.height - 50, this.x1 + 60, this.y - this.height); // Left roof
-        triangle(this.x1 + this.width - 30, this.y - this.height, this.x1 + this.width, this.y - this.height - 50, this.x1 + this.width - 60, this.y - this.height); // Right roof
-
-        // Battlements
+        triangle(this.x1, this.y - this.height, this.x1 + 30, this.y - this.height - 50, this.x1 + 60, this.y - this.height);
+        triangle(this.x1 + this.width - 30, this.y - this.height, this.x1 + this.width, this.y - this.height - 50, this.x1 + this.width - 60, this.y - this.height);
         fill("black");
         for (let i = 0; i < 5; i++) {
             rect(this.x1 + (i * 20) + 5, this.y - this.height - 10, 10, 10);
